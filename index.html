@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Kit - Overview</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="bi bi-circle-fill"></i>
+            </div>
+            <span>Dashboard Kit</span>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active">
+            <i class="bi bi-pie-chart-fill"></i>
+            <span>Overview</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="bi bi-ticket"></i>
+            <span>Tickets</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="bi bi-lightbulb"></i>
+            <span>Ideas</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="bi bi-people"></i>
+            <span>Contacts</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="bi bi-person"></i>
+            <span>Agents</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="bi bi-file-text"></i>
+            <span>Articles</span>
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="#" class="nav-item">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="bi bi-box"></i>
+            <span>Subscription</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="content-header">
+          <h1>Overview</h1>
+          <div class="header-actions">
+            <button class="btn-icon">
+              <i class="bi bi-search"></i>
+            </button>
+            <button class="btn-icon notification-btn">
+              <i class="bi bi-bell"></i>
+            </button>
+            <div class="divider"></div>
+            <div class="user-profile">
+              <span class="user-name">Jones Ferdinand</span>
+              <img
+                src="https://i.pravatar.cc/44?img=12"
+                alt="User Avatar"
+                class="user-avatar"
+              />
+            </div>
+          </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Unresolved</div>
+            <div class="stat-value">60</div>
+          </div>
+          <div class="stat-card stat-card-active">
+            <div class="stat-label">Overdue</div>
+            <div class="stat-value">16</div>
+            <i class="bi bi-cursor-fill stat-cursor"></i>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Open</div>
+            <div class="stat-value">43</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">On hold</div>
+            <div class="stat-value">64</div>
+          </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+          <!-- Left Column - Chart -->
+          <div class="chart-section">
+            <div class="card">
+              <div class="card-header-custom">
+                <div class="card-title-group">
+                  <h3 class="card-title">Today's trends</h3>
+                  <p class="card-subtitle">as of 25 May 2019, 09:41 PM</p>
+                </div>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-dot legend-today"></span>
+                    <span class="legend-text">Today</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot legend-yesterday"></span>
+                    <span class="legend-text">Yesterday</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body-custom">
+                <canvas id="trendsChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Tickets Accordion Section -->
+            <div
+              class="accordion accordion-flush tickets-accordion-wrapper"
+              id="ticketsAccordion"
+            >
+              <div class="accordion-item">
+                <div class="accordion-header-custom" id="headingTickets">
+                  <div class="accordion-header-content">
+                    <div class="accordion-title-group">
+                      <h3 class="accordion-title">Unresolved tickets</h3>
+                      <p class="accordion-subtitle">
+                        Group: <span class="subtitle-bold">Support</span>
+                      </p>
+                    </div>
+                    <button
+                      class="btn-link-accordion"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTickets"
+                      aria-expanded="false"
+                      aria-controls="collapseTickets"
+                    >
+                      <span class="link-text"></span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  id="collapseTickets"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTickets"
+                  data-bs-parent="#ticketsAccordion"
+                >
+                  <div class="accordion-body">
+                    <div class="ticket-list">
+                      <div class="ticket-item">
+                        <span class="ticket-name"
+                          >Waiting on Feature Request</span
+                        >
+                        <span class="ticket-number">4238</span>
+                      </div>
+                      <div class="ticket-item">
+                        <span class="ticket-name"
+                          >Awaiting Customer Response</span
+                        >
+                        <span class="ticket-number">1005</span>
+                      </div>
+                      <div class="ticket-item">
+                        <span class="ticket-name">Awaiting Developer Fix</span>
+                        <span class="ticket-number">914</span>
+                      </div>
+                      <div class="ticket-item ticket-item-last">
+                        <span class="ticket-name">Pending</span>
+                        <span class="ticket-number">281</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column - Stats & Tasks -->
+          <div class="side-section">
+            <!-- Stats Card -->
+            <div class="card stats-card">
+              <div class="stats-list">
+                <div class="stat-item">
+                  <div class="stat-item-label">Resolved</div>
+                  <div class="stat-item-value">449</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-item-label">Received</div>
+                  <div class="stat-item-value">426</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-item-label">Average first response time</div>
+                  <div class="stat-item-value">33m</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-item-label">Average response time</div>
+                  <div class="stat-item-value">3h 8m</div>
+                </div>
+                <div class="stat-item stat-item-last">
+                  <div class="stat-item-label">Resolution within SLA</div>
+                  <div class="stat-item-value">94%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tasks Card -->
+            <div class="card tasks-card">
+              <div class="card-header-custom">
+                <div class="card-title-group">
+                  <h3 class="card-title">Tasks</h3>
+                  <p class="card-subtitle">Today</p>
+                </div>
+                <a href="#" class="link-view">View all</a>
+              </div>
+              <div class="card-body-custom">
+                <div class="task-create">
+                  <input
+                    type="text"
+                    class="task-input"
+                    placeholder="Create new task"
+                  />
+                  <button class="task-add-btn">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+                <div class="task-list">
+                  <div class="task-item">
+                    <div class="task-checkbox-wrapper">
+                      <input
+                        type="radio"
+                        class="task-radio"
+                        name="tasks"
+                        id="task1"
+                      />
+                      <label for="task1" class="task-label"
+                        >Finish ticket update</label
+                      >
+                    </div>
+                    <span class="task-badge task-badge-warning">1d ago</span>
+                  </div>
+                  <div class="task-item">
+                    <div class="task-checkbox-wrapper">
+                      <input
+                        type="radio"
+                        class="task-radio"
+                        name="tasks"
+                        id="task2"
+                      />
+                      <label for="task2" class="task-label"
+                        >Create new ticket example</label
+                      >
+                    </div>
+                    <span class="task-badge task-badge-new">NEW</span>
+                  </div>
+                  <div class="task-item task-item-last">
+                    <div class="task-checkbox-wrapper">
+                      <input
+                        type="radio"
+                        class="task-radio"
+                        name="tasks"
+                        id="task3"
+                        checked
+                      />
+                      <label for="task3" class="task-label"
+                        >Update ticket report</label
+                      >
+                    </div>
+                    <span class="task-badge task-badge-default">DEFAULT</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
+    <script src="src/js/main.js"></script>
+  </body>
+</html>

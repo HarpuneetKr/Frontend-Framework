@@ -1,0 +1,818 @@
+// ==================== VARIABLES ====================
+$sidebar-bg: #363740;
+$sidebar-width: 255px;
+$primary-color: #3751FF;
+$text-primary: #252733;
+$text-secondary: #9FA2B4;
+$text-tertiary: #C5C7CD;
+$text-light: #A4A6B3;
+$border-color: #DFE0EB;
+$bg-main: #F7F8FC;
+$bg-white: #FFFFFF;
+$bg-input: #FCFDFE;
+$border-input: #F0F1F7;
+$active-sidebar: #DDE2FF;
+$badge-warning: #FEC400;
+$badge-new: #29CC97;
+$badge-default: #C5C7CD;
+
+// ==================== MIXINS ====================
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.2s) {
+    transition: $property $duration ease;
+}
+
+// ==================== RESET ====================
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: $bg-main;
+    color: $text-primary;
+    line-height: 1.5;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+// ==================== SIDEBAR ====================
+.sidebar {
+    width: $sidebar-width;
+    background-color: $sidebar-bg;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+
+    &-header {
+        padding: 37px 32px 39px;
+    }
+
+    &-nav {
+        flex: 1;
+        padding-top: 32px;
+    }
+
+    &-footer {
+        padding: 32px 0 76px;
+        border-top: 1px solid rgba(223, 224, 235, 0.06);
+
+        .nav-item {
+            margin-top: 0;
+        }
+    }
+}
+
+.logo {
+    @include flex-center;
+    gap: 12px;
+
+    &-icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        border-radius: 50%;
+        @include flex-center;
+        justify-content: center;
+
+        i {
+            color: $bg-white;
+            font-size: 12px;
+        }
+    }
+
+    span {
+        font-size: 19px;
+        font-weight: 700;
+        color: $text-light;
+        letter-spacing: 0.4px;
+    }
+}
+
+.nav-item {
+    @include flex-center;
+    gap: 24px;
+    padding: 18px 32px;
+    color: $text-light;
+    text-decoration: none;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    @include transition;
+    position: relative;
+
+    i {
+        font-size: 16px;
+        width: 16px;
+        opacity: 0.4;
+    }
+
+    &:hover {
+        background-color: rgba(159, 162, 180, 0.08);
+    }
+
+    &.active {
+        background-color: rgba(159, 162, 180, 0.08);
+        color: $active-sidebar;
+        border-left: 3px solid $active-sidebar;
+        padding-left: 29px;
+
+        i {
+            opacity: 1;
+        }
+    }
+}
+
+// ==================== MAIN CONTENT ====================
+.main-content {
+    margin-left: $sidebar-width;
+    flex: 1;
+    padding: 41px 30px 48px 30px;
+    background-color: $bg-main;
+}
+
+// ==================== HEADER ====================
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 54px;
+
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: $text-primary;
+        letter-spacing: 0.3px;
+    }
+}
+
+.header-actions {
+    @include flex-center;
+    gap: 32px;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    @include flex-center;
+    justify-content: center;
+    color: $text-tertiary;
+    font-size: 16px;
+    padding: 0;
+    @include transition(color);
+
+    &:hover {
+        color: $text-primary;
+    }
+}
+
+.notification-btn {
+    position: relative;
+}
+
+.divider {
+    width: 1px;
+    height: 32px;
+    background-color: $border-color;
+}
+
+.user-profile {
+    @include flex-center;
+    gap: 14px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-primary;
+    letter-spacing: 0.2px;
+}
+
+.user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+// ==================== STATS GRID ====================
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: $bg-white;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 24px 32px 23px;
+    position: relative;
+    cursor: pointer;
+    @include transition;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    &-active {
+        border: 2px solid $primary-color;
+        padding: 23px 31px 22px;
+    }
+}
+
+.stat-label {
+    font-size: 19px;
+    font-weight: 700;
+    color: $text-secondary;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+}
+
+.stat-value {
+    font-size: 40px;
+    font-weight: 700;
+    color: $text-primary;
+    letter-spacing: 1px;
+}
+
+.stat-cursor {
+    position: absolute;
+    bottom: 23px;
+    right: 32px;
+    font-size: 18px;
+    color: $primary-color;
+}
+
+// ==================== CONTENT GRID ====================
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 351px;
+    gap: 30px;
+}
+
+// ==================== CARD STYLES ====================
+.card {
+    background: $bg-white;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.card-header-custom {
+    padding: 32px 32px 8px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-title-group {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: $text-primary;
+    letter-spacing: 0.4px;
+    margin-bottom: 8px;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: $text-secondary;
+    letter-spacing: 0.1px;
+}
+
+.subtitle-bold {
+    font-weight: 700;
+    color: $text-primary;
+}
+
+.link-view {
+    font-size: 14px;
+    font-weight: 600;
+    color: $primary-color;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.card-body-custom {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+// ==================== CHART LEGEND ====================
+.chart-legend {
+    display: flex;
+    gap: 30px;
+    margin-top: 2px;
+}
+
+.legend-item {
+    @include flex-center;
+    gap: 8px;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    &.legend-today {
+        background-color: $primary-color;
+    }
+
+    &.legend-yesterday {
+        background-color: $border-color;
+    }
+}
+
+.legend-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: $text-secondary;
+    letter-spacing: 0.1px;
+}
+
+// ==================== CHART SECTION ====================
+.chart-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#trendsChart {
+    width: 100% !important;
+    height: 254px !important;
+    display: block;
+    box-sizing: border-box;
+}
+
+// Chart container to control overflow
+.card-body-custom {
+    canvas {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+// ==================== TICKETS ACCORDION ====================
+.tickets-accordion-wrapper {
+    .accordion-item {
+        background: $bg-white;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        margin-bottom: 0;
+    }
+
+    .accordion-header-custom {
+        padding: 32px 32px 32px 32px;
+        background: $bg-white;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .accordion-header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .accordion-title-group {
+        flex: 1;
+    }
+
+    .accordion-title {
+        font-size: 19px;
+        font-weight: 700;
+        color: $text-primary;
+        letter-spacing: 0.4px;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+
+    .accordion-subtitle {
+        font-size: 12px;
+        font-weight: 400;
+        color: $text-secondary;
+        letter-spacing: 0.1px;
+        margin-bottom: 0;
+        line-height: 1.5;
+    }
+
+    .btn-link-accordion {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        @include transition;
+
+        .link-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: $primary-color;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            
+            &::before {
+                content: "View details";
+            }
+        }
+
+        &:hover {
+            .link-text {
+                text-decoration: underline;
+            }
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        &[aria-expanded="true"] {
+            .link-text {
+                &::before {
+                    content: "Hide details";
+                }
+            }
+        }
+    }
+
+    .accordion-collapse {
+        border: none;
+    }
+
+    .accordion-body {
+        padding: 0;
+        background: $bg-white;
+    }
+}
+
+// ==================== TICKET LIST ====================
+.ticket-list {
+    padding: 0 32px;
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid $border-color;
+
+    &-last {
+        border-bottom: none;
+        padding-bottom: 32px;
+    }
+}
+
+.ticket-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-primary;
+    letter-spacing: 0.2px;
+}
+
+.ticket-number {
+    font-size: 14px;
+    font-weight: 400;
+    color: $text-tertiary;
+    letter-spacing: 0.2px;
+}
+
+// ==================== SIDE SECTION ====================
+.side-section {
+    display: flex;
+    flex-direction: column;
+}
+
+// ==================== STATS CARD ====================
+.stats-card {
+    margin-bottom: 30px;
+}
+
+.stats-list {
+    padding: 0;
+}
+
+.stat-item {
+    padding: 24px 32px;
+    border-bottom: 1px solid $border-color;
+
+    &-last {
+        border-bottom: none;
+    }
+
+    &-label {
+        font-size: 16px;
+        font-weight: 600;
+        color: $text-secondary;
+        letter-spacing: 0.3px;
+        margin-bottom: 6px;
+    }
+
+    &-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: $text-primary;
+        letter-spacing: 0.3px;
+    }
+}
+
+// ==================== TASKS CARD ====================
+.tasks-card {
+    margin-bottom: 0;
+}
+
+.task-create {
+    @include flex-center;
+    gap: 16px;
+    padding: 32px 32px 24px 32px;
+}
+
+.task-input {
+    flex: 1;
+    border: 1px solid $border-input;
+    background-color: $bg-input;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $text-primary;
+    letter-spacing: 0.3px;
+    outline: none;
+    @include transition(border-color);
+
+    &::placeholder {
+        color: $text-secondary;
+    }
+
+    &:focus {
+        border-color: $primary-color;
+    }
+}
+
+.task-add-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    @include flex-center;
+    justify-content: center;
+    cursor: pointer;
+    color: $text-secondary;
+    font-size: 20px;
+    @include transition;
+
+    &:hover {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $bg-white;
+    }
+}
+
+.task-list {
+    padding: 0 32px 32px 32px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid $border-color;
+
+    &-last {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+.task-checkbox-wrapper {
+    @include flex-center;
+    gap: 16px;
+    flex: 1;
+}
+
+.task-radio {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: $primary-color;
+}
+
+.task-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-primary;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.task-badge {
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    &-warning {
+        background-color: $badge-warning;
+        color: $text-primary;
+    }
+
+    &-new {
+        background-color: $badge-new;
+        color: $bg-white;
+    }
+
+    &-default {
+        background-color: rgba($badge-default, 0.12);
+        color: $text-secondary;
+    }
+}
+
+// ==================== RESPONSIVE ====================
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        @include transition(transform, 0.3s);
+
+        &.active {
+            transform: translateX(0);
+        }
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 30px;
+
+        h1 {
+            font-size: 20px;
+        }
+    }
+
+    .header-actions {
+        gap: 20px;
+    }
+
+    #trendsChart {
+        height: 200px !important;
+    }
+
+    .card-header-custom {
+        padding: 20px 20px 8px 20px;
+    }
+
+    .tickets-accordion-wrapper {
+        .accordion-header-custom {
+            padding: 20px;
+        }
+
+        .accordion-header-content {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+    }
+
+    .ticket-list {
+        padding: 0 20px;
+    }
+
+    .stats-list {
+        padding: 0 20px;
+    }
+
+    .task-create,
+    .task-list {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-card {
+        padding: 20px 24px;
+    }
+
+    .stat-label {
+        font-size: 16px;
+    }
+
+    .stat-value {
+        font-size: 32px;
+    }
+
+    .user-profile {
+        .user-name {
+            display: none;
+        }
+    }
+}
+
+// ==================== MOBILE MENU TOGGLE ====================
+.mobile-menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    @include flex-center;
+    justify-content: center;
+    color: $text-primary;
+    font-size: 24px;
+
+    @media (max-width: 768px) {
+        display: flex;
+    }
+}
+
+// ==================== ANIMATIONS ====================
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card,
+.card,
+.accordion-item {
+    animation: slideIn 0.3s ease;
+}
+
+// ==================== SCROLLBAR STYLING ====================
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $bg-main;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $text-tertiary;
+    border-radius: 4px;
+
+    &:hover {
+        background: $text-secondary;
+    }
+}
