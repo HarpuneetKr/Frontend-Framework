@@ -1,4 +1,4 @@
-// ==================== VARIABLES ====================
+//  VARIABLES 
 $sidebar-bg: #363740;
 $sidebar-width: 255px;
 $primary-color: #3751FF;
@@ -16,7 +16,7 @@ $badge-warning: #FEC400;
 $badge-new: #29CC97;
 $badge-default: #C5C7CD;
 
-// ==================== MIXINS ====================
+//  MIXINS 
 @mixin flex-center {
     display: flex;
     align-items: center;
@@ -26,7 +26,7 @@ $badge-default: #C5C7CD;
     transition: $property $duration ease;
 }
 
-// ==================== RESET ====================
+//  RESET 
 * {
     margin: 0;
     padding: 0;
@@ -45,7 +45,7 @@ body {
     min-height: 100vh;
 }
 
-// ==================== SIDEBAR ====================
+//  SIDEBAR 
 .sidebar {
     width: $sidebar-width;
     background-color: $sidebar-bg;
@@ -135,7 +135,7 @@ body {
     }
 }
 
-// ==================== MAIN CONTENT ====================
+//  MAIN CONTENT 
 .main-content {
     margin-left: $sidebar-width;
     flex: 1;
@@ -143,7 +143,7 @@ body {
     background-color: $bg-main;
 }
 
-// ==================== HEADER ====================
+//  HEADER 
 .content-header {
     display: flex;
     justify-content: space-between;
@@ -210,7 +210,7 @@ body {
     object-fit: cover;
 }
 
-// ==================== STATS GRID ====================
+//  STATS GRID 
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -260,14 +260,14 @@ body {
     color: $primary-color;
 }
 
-// ==================== CONTENT GRID ====================
+//  CONTENT GRID 
 .content-grid {
     display: grid;
     grid-template-columns: 1fr 351px;
     gap: 30px;
 }
 
-// ==================== CARD STYLES ====================
+//  CARD STYLES 
 .card {
     background: $bg-white;
     border: 1px solid $border-color;
@@ -325,7 +325,7 @@ body {
     overflow: hidden;
 }
 
-// ==================== CHART LEGEND ====================
+//  CHART LEGEND 
 .chart-legend {
     display: flex;
     gap: 30px;
@@ -358,7 +358,7 @@ body {
     letter-spacing: 0.1px;
 }
 
-// ==================== CHART SECTION ====================
+//  CHART SECTION 
 .chart-section {
     display: flex;
     flex-direction: column;
@@ -380,7 +380,7 @@ body {
     }
 }
 
-// ==================== TICKETS ACCORDION ====================
+//  TICKETS ACCORDION 
 .tickets-accordion-wrapper {
     .accordion-item {
         background: $bg-white;
@@ -473,7 +473,7 @@ body {
     }
 }
 
-// ==================== TICKET LIST ====================
+//  TICKET LIST 
 .ticket-list {
     padding: 0 32px;
 }
@@ -505,13 +505,13 @@ body {
     letter-spacing: 0.2px;
 }
 
-// ==================== SIDE SECTION ====================
+//  SIDE SECTION 
 .side-section {
     display: flex;
     flex-direction: column;
 }
 
-// ==================== STATS CARD ====================
+//  STATS CARD 
 .stats-card {
     margin-bottom: 30px;
 }
@@ -544,7 +544,7 @@ body {
     }
 }
 
-// ==================== TASKS CARD ====================
+//  TASKS CARD 
 .tasks-card {
     margin-bottom: 0;
 }
@@ -661,7 +661,7 @@ body {
     }
 }
 
-// ==================== RESPONSIVE ====================
+//  RESPONSIVE 
 @media (max-width: 1200px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -762,7 +762,7 @@ body {
     }
 }
 
-// ==================== MOBILE MENU TOGGLE ====================
+//  MOBILE MENU TOGGLE 
 .mobile-menu-toggle {
     display: none;
     width: 40px;
@@ -780,7 +780,7 @@ body {
     }
 }
 
-// ==================== ANIMATIONS ====================
+//  ANIMATIONS 
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -798,7 +798,7 @@ body {
     animation: slideIn 0.3s ease;
 }
 
-// ==================== SCROLLBAR STYLING ====================
+//  SCROLLBAR STYLING
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
