@@ -89,59 +89,94 @@
         </header>
 
         <!-- Stats Cards -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label">Unresolved</div>
-            <div class="stat-value">60</div>
-          </div>
-          <div class="stat-card stat-card-active">
-            <div class="stat-label">Overdue</div>
-            <div class="stat-value">16</div>
-            <i class="bi bi-cursor-fill stat-cursor"></i>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Open</div>
-            <div class="stat-value">43</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">On hold</div>
-            <div class="stat-value">64</div>
-          </div>
-        </div>
+        <section class="stats-grid" aria-label="Ticket Statistics">
+          <article class="stat-card">
+            <h2 class="stat-label">Unresolved</h2>
+            <p class="stat-value">60</p>
+          </article>
+          <article class="stat-card stat-card-active">
+            <h2 class="stat-label">Overdue</h2>
+            <p class="stat-value">16</p>
+            <i class="bi bi-cursor-fill stat-cursor" aria-hidden="true"></i>
+          </article>
+          <article class="stat-card">
+            <h2 class="stat-label">Open</h2>
+            <p class="stat-value">43</p>
+          </article>
+          <article class="stat-card">
+            <h2 class="stat-label">On hold</h2>
+            <p class="stat-value">64</p>
+          </article>
+        </section>
 
         <!-- Content Grid -->
-        <div class="content-grid">
-          <!-- Left Column - Chart -->
-          <div class="chart-section">
-            <div class="card">
-              <div class="card-header-custom">
-                <div class="card-title-group">
-                  <h3 class="card-title">Today's trends</h3>
-                  <p class="card-subtitle">as of 25 May 2019, 09:41 PM</p>
-                </div>
-                <div class="chart-legend">
-                  <div class="legend-item">
-                    <span class="legend-dot legend-today"></span>
-                    <span class="legend-text">Today</span>
+        <section class="content-grid">
+          <!-- Row 1 - Chart and Stats -->
+          <div class="row-section">
+            <article class="chart-section" aria-labelledby="trends-title">
+              <div class="card">
+                <header class="card-header-custom">
+                  <div class="card-title-group">
+                    <h3 id="trends-title" class="card-title">Today's trends</h3>
+                    <p class="card-subtitle">
+                      <time datetime="2019-05-25T21:41">as of 25 May 2019, 09:41 PM</time>
+                    </p>
                   </div>
-                  <div class="legend-item">
-                    <span class="legend-dot legend-yesterday"></span>
-                    <span class="legend-text">Yesterday</span>
+                  <div class="chart-legend" role="list">
+                    <div class="legend-item" role="listitem">
+                      <span class="legend-dot legend-today" aria-hidden="true"></span>
+                      <span class="legend-text">Today</span> 
+                    </div>
+                    <div class="legend-item" role="listitem">
+                      <span class="legend-dot legend-yesterday" aria-hidden="true"></span>
+                      <span class="legend-text">Yesterday</span>
+                    </div>
                   </div>
+                </header>
+                <div class="card-body-custom">
+                  <canvas id="trendsChart" role="img" aria-label="Line chart showing today's and yesterday's trends"></canvas>
                 </div>
               </div>
-              <div class="card-body-custom">
-                <canvas id="trendsChart"></canvas>
-              </div>
-            </div>
+            </article>
 
+            <!-- Stats Card -->
+            <aside class="card stats-card" aria-labelledby="stats-title">
+              <h3 id="stats-title" class="visually-hidden">Performance Statistics</h3>
+              <dl class="stats-list">
+                <div class="stat-item">
+                  <dt class="stat-item-label">Resolved</dt>
+                  <dd class="stat-item-value">449</dd>
+                </div>
+                <div class="stat-item">
+                  <dt class="stat-item-label">Received</dt>
+                  <dd class="stat-item-value">426</dd>
+                </div>
+                <div class="stat-item">
+                  <dt class="stat-item-label">Average first response time</dt>
+                  <dd class="stat-item-value">33m</dd>
+                </div>
+                <div class="stat-item">
+                  <dt class="stat-item-label">Average response time</dt>
+                  <dd class="stat-item-value">3h 8m</dd>
+                </div>
+                <div class="stat-item stat-item-last">
+                  <dt class="stat-item-label">Resolution within SLA</dt>
+                  <dd class="stat-item-value">94%</dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
+
+          <!-- Row 2 - Tickets Accordion and Tasks -->
+          <div class="row-section">
             <!-- Tickets Accordion Section -->
-            <div
+            <section
               class="accordion accordion-flush tickets-accordion-wrapper"
               id="ticketsAccordion"
+              aria-label="Unresolved Tickets"
             >
-              <div class="accordion-item">
-                <div class="accordion-header-custom" id="headingTickets">
+              <article class="accordion-item">
+                <header class="accordion-header-custom" id="headingTickets">
                   <div class="accordion-header-content">
                     <div class="accordion-title-group">
                       <h3 class="accordion-title">Unresolved tickets</h3>
@@ -156,11 +191,12 @@
                       data-bs-target="#collapseTickets"
                       aria-expanded="false"
                       aria-controls="collapseTickets"
+                      aria-label="Toggle ticket details"
                     >
                       <span class="link-text"></span>
                     </button>
                   </div>
-                </div>
+                </header>
                 <div
                   id="collapseTickets"
                   class="accordion-collapse collapse"
@@ -168,84 +204,57 @@
                   data-bs-parent="#ticketsAccordion"
                 >
                   <div class="accordion-body">
-                    <div class="ticket-list">
-                      <div class="ticket-item">
+                    <ul class="ticket-list">
+                      <li class="ticket-item">
                         <span class="ticket-name"
                           >Waiting on Feature Request</span
                         >
                         <span class="ticket-number">4238</span>
-                      </div>
-                      <div class="ticket-item">
+                      </li>
+                      <li class="ticket-item">
                         <span class="ticket-name"
                           >Awaiting Customer Response</span
                         >
                         <span class="ticket-number">1005</span>
-                      </div>
-                      <div class="ticket-item">
+                      </li>
+                      <li class="ticket-item">
                         <span class="ticket-name">Awaiting Developer Fix</span>
                         <span class="ticket-number">914</span>
-                      </div>
-                      <div class="ticket-item ticket-item-last">
+                      </li>
+                      <li class="ticket-item ticket-item-last">
                         <span class="ticket-name">Pending</span>
                         <span class="ticket-number">281</span>
-                      </div>
-                    </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column - Stats & Tasks -->
-          <div class="side-section">
-            <!-- Stats Card -->
-            <div class="card stats-card">
-              <div class="stats-list">
-                <div class="stat-item">
-                  <div class="stat-item-label">Resolved</div>
-                  <div class="stat-item-value">449</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-item-label">Received</div>
-                  <div class="stat-item-value">426</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-item-label">Average first response time</div>
-                  <div class="stat-item-value">33m</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-item-label">Average response time</div>
-                  <div class="stat-item-value">3h 8m</div>
-                </div>
-                <div class="stat-item stat-item-last">
-                  <div class="stat-item-label">Resolution within SLA</div>
-                  <div class="stat-item-value">94%</div>
-                </div>
-              </div>
-            </div>
+              </article>
+            </section>
 
             <!-- Tasks Card -->
-            <div class="card tasks-card">
-              <div class="card-header-custom">
+            <aside class="card tasks-card" aria-labelledby="tasks-title">
+              <header class="card-header-custom">
                 <div class="card-title-group">
-                  <h3 class="card-title">Tasks</h3>
+                  <h3 id="tasks-title" class="card-title">Tasks</h3>
                   <p class="card-subtitle">Today</p>
                 </div>
                 <a href="#" class="link-view">View all</a>
-              </div>
+              </header>
               <div class="card-body-custom">
-                <div class="task-create">
+                <form class="task-create" onsubmit="return false;">
+                  <label for="taskInput" class="visually-hidden">Create new task</label>
                   <input
                     type="text"
+                    id="taskInput"
                     class="task-input"
                     placeholder="Create new task"
                   />
-                  <button class="task-add-btn">
-                    <i class="bi bi-plus"></i>
+                  <button class="task-add-btn" type="submit" aria-label="Add task">
+                    <i class="bi bi-plus" aria-hidden="true"></i>
                   </button>
-                </div>
-                <div class="task-list">
-                  <div class="task-item">
+                </form>
+                <ul class="task-list">
+                  <li class="task-item">
                     <div class="task-checkbox-wrapper">
                       <input
                         type="radio"
@@ -258,8 +267,8 @@
                       >
                     </div>
                     <span class="task-badge task-badge-warning">1d ago</span>
-                  </div>
-                  <div class="task-item">
+                  </li>
+                  <li class="task-item">
                     <div class="task-checkbox-wrapper">
                       <input
                         type="radio"
@@ -272,8 +281,8 @@
                       >
                     </div>
                     <span class="task-badge task-badge-new">NEW</span>
-                  </div>
-                  <div class="task-item task-item-last">
+                  </li>
+                  <li class="task-item task-item-last">
                     <div class="task-checkbox-wrapper">
                       <input
                         type="radio"
@@ -287,12 +296,12 @@
                       >
                     </div>
                     <span class="task-badge task-badge-default">DEFAULT</span>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </div>
-            </div>
+            </aside>
           </div>
-        </div>
+        </section>
       </main>
     </div>
 

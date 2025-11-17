@@ -1,4 +1,3 @@
-// ==================== INITIALIZE ====================
 document.addEventListener("DOMContentLoaded", function () {
   initializeChart();
   initializeTaskInteractions();
@@ -7,13 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeAccordionTracking();
 });
 
-// ==================== CHART INITIALIZATION ====================
 function initializeChart() {
   const ctx = document.getElementById("trendsChart");
 
   if (!ctx) return;
 
-  // Data matching the EXACT pattern from the image
+
   const todayData = [
     15, 18, 20, 24, 28, 35, 42, 52, 48, 35, 22, 18, 15, 38, 42, 38, 32, 28, 25,
     22, 20, 18, 16,
@@ -24,7 +22,7 @@ function initializeChart() {
     12, 11, 10, 9,
   ];
 
-  // Create gradients for area fill matching the image
+
   const gradient1 = ctx.getContext("2d").createLinearGradient(0, 0, 0, 254);
   gradient1.addColorStop(0, "rgba(63, 81, 181, 0.08)");
   gradient1.addColorStop(1, "rgba(63, 81, 181, 0.0)");
@@ -33,7 +31,6 @@ function initializeChart() {
   gradient2.addColorStop(0, "rgba(200, 200, 210, 0.05)");
   gradient2.addColorStop(1, "rgba(200, 200, 210, 0.0)");
 
-  // Create the chart
   const chart = new Chart(ctx, {
     type: "line",
     data: {
@@ -102,6 +99,7 @@ function initializeChart() {
         mode: "index",
         intersect: false,
       },
+      resizeDelay: 0,
       plugins: {
         legend: {
           display: false,
@@ -128,7 +126,7 @@ function initializeChart() {
           caretPadding: 8,
           callbacks: {
             title: function (context) {
-              return `${context[0].parsed.y}`;
+              return `${context[0].parsed.y} visitors`;
             },
             label: function (context) {
               return "";
@@ -200,27 +198,24 @@ function initializeChart() {
     },
   });
 
-  // Store chart instance
   window.dashboardChart = chart;
 }
 
-function initializeStatCards() {
-  const statCards = document.querySelectorAll(".stat-card");
-
-  statCards.forEach((card) => {
-    card.addEventListener("click", function () {
-      statCards.forEach((c) => c.classList.remove("stat-card-active"));
-      this.classList.add("stat-card-active");
-
-      const label = this.querySelector(".stat-label").textContent;
-      console.log(`Stat card clicked: ${label}`);
-    });
-  });
-}
 
 function initializeTaskInteractions() {
-  const taskInput = document.querySelector(".task-input");
+  const taskInput = document.getElementById("taskInput");
   const taskAddBtn = document.querySelector(".task-add-btn");
+  const taskForm = document.querySelector(".task-create");
+
+  if (taskForm) {
+    taskForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (taskInput.value.trim()) {
+        addNewTask(taskInput.value.trim());
+        taskInput.value = "";
+      }
+    });
+  }
 
   if (taskInput && taskAddBtn) {
     taskInput.addEventListener("keypress", function (e) {
@@ -230,7 +225,8 @@ function initializeTaskInteractions() {
       }
     });
 
-    taskAddBtn.addEventListener("click", function () {
+    taskAddBtn.addEventListener("click", function (e) {
+      e.preventDefault();
       if (taskInput.value.trim()) {
         addNewTask(taskInput.value.trim());
         taskInput.value = "";
