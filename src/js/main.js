@@ -1,3 +1,4 @@
+//  INITIALIZE 
 document.addEventListener("DOMContentLoaded", function () {
   initializeChart();
   initializeTaskInteractions();
@@ -6,12 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeAccordionTracking();
 });
 
+//  CHART INITIALIZATION 
 function initializeChart() {
   const ctx = document.getElementById("trendsChart");
-
   if (!ctx) return;
 
-
+  // Data matching the exact pattern from the design
   const todayData = [
     15, 18, 20, 24, 28, 35, 42, 52, 48, 35, 22, 18, 15, 38, 42, 38, 32, 28, 25,
     22, 20, 18, 16,
@@ -22,7 +23,7 @@ function initializeChart() {
     12, 11, 10, 9,
   ];
 
-
+  // Gradients for smooth area fill under lines
   const gradient1 = ctx.getContext("2d").createLinearGradient(0, 0, 0, 254);
   gradient1.addColorStop(0, "rgba(63, 81, 181, 0.08)");
   gradient1.addColorStop(1, "rgba(63, 81, 181, 0.0)");
@@ -31,33 +32,14 @@ function initializeChart() {
   gradient2.addColorStop(0, "rgba(200, 200, 210, 0.05)");
   gradient2.addColorStop(1, "rgba(200, 200, 210, 0.0)");
 
+  // The main chart instance
   const chart = new Chart(ctx, {
     type: "line",
     data: {
       labels: [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20",
-        "21",
-        "22",
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19",
+        "20", "21", "22"
       ],
       datasets: [
         {
@@ -95,15 +77,12 @@ function initializeChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      interaction: {
-        mode: "index",
-        intersect: false,
-      },
+      interaction: { mode: "index", intersect: false },
       resizeDelay: 0,
       plugins: {
-        legend: {
-          display: false,
-        },
+        legend: { display: false },
+
+        // TOOLTIP
         tooltip: {
           enabled: true,
           backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -112,15 +91,8 @@ function initializeChart() {
           borderWidth: 1,
           titleColor: "#ffffff",
           bodyColor: "#ffffff",
-          titleFont: {
-            size: 13,
-            weight: "600",
-            family: "Mulish",
-          },
-          bodyFont: {
-            size: 12,
-            family: "Mulish",
-          },
+          titleFont: { size: 13, weight: "600", family: "Mulish" },
+          bodyFont: { size: 12, family: "Mulish" },
           displayColors: false,
           caretSize: 6,
           caretPadding: 8,
@@ -128,7 +100,7 @@ function initializeChart() {
             title: function (context) {
               return `${context[0].parsed.y} visitors`;
             },
-            label: function (context) {
+            label: function () {
               return "";
             },
           },
@@ -142,66 +114,34 @@ function initializeChart() {
           ticks: {
             stepSize: 10,
             color: "#9FA2B4",
-            font: {
-              size: 11,
-              weight: "400",
-              family: "Mulish",
-            },
+            font: { size: 11, weight: "400", family: "Mulish" },
             padding: 8,
-            callback: function (value) {
-              return value;
-            },
           },
-          grid: {
-            color: "#f0f0f5",
-            drawBorder: false,
-            lineWidth: 1,
-            drawTicks: false,
-          },
-          border: {
-            display: false,
-          },
+          grid: { color: "#f0f0f5", drawBorder: false, drawTicks: false },
+          border: { display: false },
         },
         x: {
           ticks: {
             color: "#9FA2B4",
-            font: {
-              size: 11,
-              weight: "400",
-              family: "Mulish",
-            },
+            font: { size: 11, weight: "400", family: "Mulish" },
             padding: 8,
             maxRotation: 0,
             autoSkip: false,
           },
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
-          border: {
-            display: false,
-          },
+          grid: { display: false },
+          border: { display: false },
         },
       },
-      animation: {
-        duration: 800,
-        easing: "easeInOutCubic",
-      },
-      layout: {
-        padding: {
-          top: 20,
-          right: 45,
-          bottom: 20,
-          left: 20,
-        },
-      },
+      animation: { duration: 800, easing: "easeInOutCubic" },
+      layout: { padding: { top: 20, right: 45, bottom: 20, left: 20 } },
     },
   });
 
+  // Store globally so we can resize on window change
   window.dashboardChart = chart;
 }
 
-
+// TASKS 
 function initializeTaskInteractions() {
   const taskInput = document.getElementById("taskInput");
   const taskAddBtn = document.querySelector(".task-add-btn");
@@ -235,27 +175,27 @@ function initializeTaskInteractions() {
   }
 }
 
+// ACCORDION TRACKING
 function initializeAccordionTracking() {
   const accordionElement = document.getElementById("ticketsAccordion");
 
   if (accordionElement) {
-    accordionElement.addEventListener("shown.bs.collapse", function (e) {
+    accordionElement.addEventListener("shown.bs.collapse", function () {
       console.log("Unresolved tickets expanded");
     });
 
-    accordionElement.addEventListener("hidden.bs.collapse", function (e) {
+    accordionElement.addEventListener("hidden.bs.collapse", function () {
       console.log("Unresolved tickets collapsed");
     });
   }
 }
 
+// MOBILE MENU
 function initializeMobileMenu() {
   const header = document.querySelector(".content-header h1");
 
   if (header && window.innerWidth <= 768) {
-    const existingBtn = document.querySelector(".mobile-menu-toggle");
-
-    if (!existingBtn) {
+    if (!document.querySelector(".mobile-menu-toggle")) {
       const menuBtn = document.createElement("button");
       menuBtn.className = "mobile-menu-toggle";
       menuBtn.innerHTML = '<i class="bi bi-list"></i>';
@@ -265,6 +205,7 @@ function initializeMobileMenu() {
   }
 }
 
+// SIDEBAR TOGGLE 
 function toggleSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.classList.toggle("active");
@@ -274,25 +215,22 @@ function toggleSidebar() {
   }
 }
 
+// Close sidebar when clicking outside
 function closeSidebarOnClickOutside(e) {
   const sidebar = document.querySelector(".sidebar");
   const menuToggle = document.querySelector(".mobile-menu-toggle");
 
-  if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+  if (!sidebar.contains(e.target) && !(menuToggle && menuToggle.contains(e.target))) {
     sidebar.classList.remove("active");
     document.removeEventListener("click", closeSidebarOnClickOutside);
   }
 }
 
+// RESIZE HANDLER
 window.addEventListener("resize", function () {
   if (window.innerWidth > 768) {
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.classList.remove("active");
+    document.querySelector(".sidebar")?.classList.remove("active");
   }
-
   initializeMobileMenu();
-
-  if (window.dashboardChart) {
-    window.dashboardChart.resize();
-  }
+  window.dashboardChart?.resize();
 });
